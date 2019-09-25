@@ -10,7 +10,7 @@ from fastai.core import parallel
 print("PyTorch version: ", torch.__version__)
 
 '''
-    This code is mostle from 'https://github.com/radekosmulski/rsna-intracranial/blob/master/01_start_here.ipynb'
+    This code is mostly from 'https://github.com/radekosmulski/rsna-intracranial/blob/master/01_start_here.ipynb'
     [slightly adapted]
 '''
 
