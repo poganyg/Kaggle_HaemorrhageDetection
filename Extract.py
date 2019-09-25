@@ -9,11 +9,17 @@ from fastai.core import parallel
 
 print("PyTorch version: ", torch.__version__)
 
+'''
+    This code is mostle from 'https://github.com/radekosmulski/rsna-intracranial/blob/master/01_start_here.ipynb'
+    [slightly adapted]
+'''
+
 window_center = 40
 window_width = 80
 
-paths = Path('/media/docear/My Passport/Kaggle/Hemorrhage/stage_1_train_images')
-pathsTest = Path('/media/docear/My Passport/Kaggle/Hemorrhage/stage_1_test_images')
+paths = Path('/media/docear/My Passport/Kaggle/Hemorrhage/stage_1_train_images') # set the path to where your ~/stage_1_train_images folder is
+pathsTest = Path('/media/docear/My Passport/Kaggle/Hemorrhage/stage_1_test_images') # set the path to where your ~/stage_1_test_images folder is
+
 path = list(paths.iterdir())[0]
 im = pydicom.read_file(str(path))
 
@@ -32,9 +38,9 @@ def resize(src, dst, sz):
     im.resize((sz,sz), resample=PIL.Image.BICUBIC).save(f'{dst}/{src.stem}.png')
     
 print('Processing Train Set')
-def resize_112(path, _): resize(path, '/media/docear/My Passport/Kaggle/Hemorrhage/data/112/train', 112)
+def resize_112(path, _): resize(path, '/media/docear/My Passport/Kaggle/Hemorrhage/data/112/train', 112) # set the destination file address to a new folder that will accept the processed training set
 parallel(resize_112, list(paths.iterdir()), max_workers=12)
 
 print('Processing Test Set')
-def resize_112_test(path, _): resize(path, '/media/docear/My Passport/Kaggle/Hemorrhage/data/112/test', 112)
+def resize_112_test(path, _): resize(path, '/media/docear/My Passport/Kaggle/Hemorrhage/data/112/test', 112) # set the destination file address to a new folder that will accept the processed test set
 parallel(resize_112_test, list(pathsTest.iterdir()), max_workers=12)
