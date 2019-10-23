@@ -24,8 +24,10 @@ import torchvision
 trainPath = Path('../trainDataKaggle/')
 trainpath = '../trainDataKaggle/'
 
+# Defining the neural network structure
 class Net(nn.Module):
-    def __init__(self):
+    def __init__(self): 
+        # Defining layer types
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(1,3,3)
         self.pool = nn.MaxPool2d(2,2) # Defines a type of maxpooling to be used
@@ -35,6 +37,7 @@ class Net(nn.Module):
         self.fc3 = nn.Linear(64, 5)
         
     def forward(self,x):
+        # Defines the forward pass using the layer types / operations defined in __init__()
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         x = x.view(-1,8*26*26)
@@ -79,7 +82,7 @@ optimizer = optim.Adam(net.parameters(), lr=0.001)
 print("Starting Training")
 
 for epoch in range(EPOCHS):
-    running_loss = 0.0
+    running_loss = 0.0  # tracks the loss over a number of batches
     for i, data in enumerate(trainLoader,0):
         # get next batch
         inputs, labels = data
