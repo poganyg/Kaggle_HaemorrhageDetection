@@ -59,7 +59,7 @@ def make_sensible(df, remove_duplicates = True, writeout = False):
             
     if writeout:
         print("Saving dataframe as: "+writeout+"..")
-        sensible_df.to_csv(writeout)
+        sensible_df.to_csv(writeout,index=False)
         print("Dataframe saved as: "+writeout)
 
     return sensible_df
